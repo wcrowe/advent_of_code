@@ -48,8 +48,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         name: format!("Elf {}", elf_number.to_string()).to_string(),
         calories: 0,
     };
-    for line in lines {
-        if line.trim().len() == 0 || line == "EOF" {
+    lines.into_iter().for_each(|line| {
+        if line.trim().len() > 0 || line.trim().parse::<i32>().is_ok() {
+            let calories = line.trim().parse::<i32>().unwrap();
+            calories_total += calories;
+            dbg!(line);
+        } else {
             let elf = Elf {
                 name: format!("Elf {}", elf_number.to_string()).to_string(),
                 calories: calories_total,
@@ -57,15 +61,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             elf_number += 1;
             elves.add(elf);
             calories_total = 0;
-            dbg!(line);
-            continue;
-        } else {
-            let calories = line.trim().parse::<i32>().unwrap();
-            calories_total += calories;
         }
-
-        // println!("Line: {}, elf {}, elf calories : {}", line.trim(), elf_number, elf.calories);
-    }
-  //  println!("Elf: {:#?}", elves);
+    });
+    let elf = Elf {
+        name: format!("Elf {}", elf_number.to_string()).to_string(),
+        calories: calories_total,
+    };
+    elves.add(elf);
+    println!("Elf: {:#?}", elves);
     Ok(())
 }
