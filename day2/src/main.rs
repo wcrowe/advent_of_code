@@ -53,7 +53,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         if line.trim().len() > 0 || line.trim().parse::<i32>().is_ok() {
             let calories = line.trim().parse::<i32>().unwrap();
             calories_total += calories;
-            dbg!(line);
         } else {
             let elf = Elf {
                 name: format!("Elf {}", elf_number.to_string()).to_string(),
@@ -79,9 +78,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     //sort the elves
     let mut sorted = elves.0;
     sorted.sort_by(|a, b| b.calories.cmp(&a.calories));
-    
 
-    dbg!(sorted);
+    let mut top3 = sorted[0..3].to_vec();
+ 
+    dbg!(top3[0].calories + top3[1].calories + top3[2].calories);
 
     Ok(())
 }
