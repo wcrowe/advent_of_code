@@ -34,7 +34,6 @@ impl Elves {
     // }
 }
 
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut file = File::open("src/data/input.txt").await?;
@@ -50,23 +49,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         calories: 0,
     };
     for line in lines {
-        if line.trim().len() == 0 {
+        if line.trim().len() == 0 || line == "EOF" {
             let elf = Elf {
                 name: format!("Elf {}", elf_number.to_string()).to_string(),
                 calories: calories_total,
             };
+            elf_number += 1;
+            elves.add(elf);
             calories_total = 0;
+            dbg!(line);
             continue;
+        } else {
+            let calories = line.trim().parse::<i32>().unwrap();
+            calories_total += calories;
         }
 
-        if line.trim().len() > 0 {
-            calories_total += line.trim().parse::<i32>().unwrap();
-        }
         // println!("Line: {}, elf {}, elf calories : {}", line.trim(), elf_number, elf.calories);
-
-
     }
-println!("Elf: {:?}", elves);
+  //  println!("Elf: {:#?}", elves);
     Ok(())
 }
-
