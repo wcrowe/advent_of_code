@@ -44,6 +44,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut elves = Elves::new();
     let mut calories_total = 0;
     let mut elf_number = 1;
+    let mut max_calories = 0;
     let elf = Elf {
         name: format!("Elf {}", elf_number.to_string()).to_string(),
         calories: 0,
@@ -58,6 +59,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 name: format!("Elf {}", elf_number.to_string()).to_string(),
                 calories: calories_total,
             };
+            if calories_total > max_calories {
+                max_calories = calories_total;
+            }
             elf_number += 1;
             elves.add(elf);
             calories_total = 0;
@@ -67,7 +71,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         name: format!("Elf {}", elf_number.to_string()).to_string(),
         calories: calories_total,
     };
+                if calories_total > max_calories {
+                max_calories = calories_total;
+            }
     elves.add(elf);
-    println!("Elf: {:#?}", elves);
+    dbg!(elves);
+    dbg!(max_calories);
+
     Ok(())
 }
