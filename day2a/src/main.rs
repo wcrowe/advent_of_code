@@ -61,8 +61,8 @@ fn convert_to_string(score: usize) -> String {
 
 fn main() {
     let draw1 = "A,X";
-    let val1 =draw1.split(",").nth(0).unwrap().trim();
-    let val2 =draw1.split(",").nth(1).unwrap().trim();
+    let val1 =draw1.split(',').next().unwrap().trim();
+    let val2 =draw1.split(',').nth(1).unwrap().trim();
    let num1 = letter_to_number(val1);
    let num2 = letter_to_number(val2);
     let score = calculate(num1, num2);
