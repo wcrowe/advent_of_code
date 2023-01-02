@@ -20,17 +20,17 @@ fn calculate(a: usize, b: usize) -> usize {
     if a == b {
         score = Draw + b;
     } else if a == Rock && b == Scissors {
-        score = Win  + b;
+        score = Lose  + b;
     } else if a == Rock && b == Paper {
         score = Win + b;
     } else if a == Paper && b == Rock {
-        score = Win + b;
-    } else if a == Paper && b == Scissors {
         score = Lose + b;
+    } else if a == Paper && b == Scissors {
+        score = Win + b;
     } else if a == Scissors && b == Paper {
         score = Lose + b;
     } else if a == Scissors && b == Rock {
-        score = Lose+ b;
+        score = Win+ b;
     }
     score
 }
@@ -60,7 +60,7 @@ fn convert_to_string(score: usize) -> String {
 }
 
 fn main() {
-    let draw1 = "A,Y";
+    let draw1 = "A,X";
     let val1 =draw1.split(",").nth(0).unwrap().trim();
     let val2 =draw1.split(",").nth(1).unwrap().trim();
    let num1 = letter_to_number(val1);
