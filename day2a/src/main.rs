@@ -1,47 +1,47 @@
 #[allow(unused_imports, unused_variables, dead_code, unused_mut)]
 
 
-const Rock: usize =1;
-const Paper: usize =2;
-const Scissors: usize =3;
+const ROCK: usize =1;
+const PAPER: usize =2;
+const SCISSORS: usize =3;
 
-const Win: usize =6;
-const Lose: usize =0;
-const Draw: usize =3;
-const A: usize = Rock;
+const WIN: usize =6;
+const LOSE: usize =0;
+const DRAW: usize =3;
+const A: usize = ROCK;
 // const B = 2;
 // const C = 3;
 // const X = 1;
-const Y : usize = Paper;
-const Z : usize = Scissors;
+const Y : usize = PAPER;
+const Z : usize = SCISSORS;
 
 fn calculate(a: usize, b: usize) -> usize {
     let mut score = 0;
     if a == b {
-        score = Draw + b;
-    } else if a == Rock && b == Scissors {
-        score = Lose  + b;
-    } else if a == Rock && b == Paper {
-        score = Win + b;
-    } else if a == Paper && b == Rock {
-        score = Lose + b;
-    } else if a == Paper && b == Scissors {
-        score = Win + b;
-    } else if a == Scissors && b == Paper {
-        score = Lose + b;
-    } else if a == Scissors && b == Rock {
-        score = Win+ b;
+        score = DRAW + b;
+    } else if a == ROCK && b == SCISSORS {
+        score = LOSE  + b;
+    } else if a == ROCK && b == PAPER {
+        score = WIN + b;
+    } else if a == PAPER && b == ROCK {
+        score = LOSE + b;
+    } else if a == PAPER && b == SCISSORS {
+        score = WIN + b;
+    } else if a == SCISSORS && b == PAPER {
+        score = LOSE + b;
+    } else if a == SCISSORS && b == ROCK {
+        score = WIN+ b;
     }
     score
 }
 fn letter_to_number(letter: &str) -> usize {
     let mut result = 0;
     if letter == "A" || letter == "X"{
-        result = Rock;
+        result = ROCK;
     } else if letter == "B" || letter == "Y"{
-        result = Paper;
+        result = PAPER;
     } else if letter == "C" || letter == "Z"{
-        result = Scissors;
+        result = SCISSORS;
     }
     result
 
